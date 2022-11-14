@@ -10,22 +10,14 @@ h2 a{
 	text-decoration: none;
 }
 
-.home {
-	background-image: url("./images/iot.jpg");
-	background-size: "cover";
-    height: "100vh";
-	background-repeat: no-repeat;
-}
 
 a{
 	text-decoration: none;
 }
 
 .navbar {
-	padding: 20px;
-	font-weight: 300;
+	font-weight: 200;
 	align-items: center;
-	max-width: 900px;
 	margin: 0 auto;
 }
 

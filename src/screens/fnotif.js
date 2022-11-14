@@ -1,25 +1,61 @@
 import React from "react";
 import axios from "axios";
-import { Link } from "react-router-dom"; 
-
+import { Link } from "react-router-dom";
+import { Toast,Modal,Button } from "react-bootstrap"; 
+import { useNavigate } from "react-router-dom";
+import Navbar from "../components/Navbar";
 const Faculty_Notification=() => {
-	React.useEffect(() => {
-		showNotifications()
-	  },[])
-	
-	  const [Notifications , setNotifications] = React.useState([])
-	
-	  const showNotifications = async(req,res) => {
-		let response = await axios.get('faculty/showNotification')
-		
-		if (response && response.data) {
-		  setNotifications(response.data.data)
+
+	const history = useNavigate()
+	  
+	  const user = JSON.parse(localStorage.getItem("user"))
+	  const jwt = localStorage.getItem("jwt")
+	  const [Notifications , setNotifications] = React.useState(user.notification)
+	  const reqA = async(id) => {
+		try{
+			let res= await fetch("/acceptstudentrequest", {
+				method: "post",
+				headers:{
+
+					"authorization" : jwt
+				},
+				body: JSON.stringify({
+					studentId: id,
+				}),
+			})
+			if(res) {
+				console.log(res);
+			}
+		}
+		catch (err) {
+			alert(err);
+		}
+	  }
+
+	  const reqR = async(id) => {
+		try{
+			let res= await fetch("/rejectstudentrequest", {
+				method: "post",
+				headers:{
+					"authorization" : jwt
+				},
+				body: JSON.stringify({
+					studentId: id,
+				}),
+			})
+			if(res) {
+				console.log(res);
+			}
+		}
+		catch (err) {
+			alert(err);
 		}
 	  }
 		
+		
 		return (
 			<div>
-			<h1> Faculty_Notification</h1>
+				<Navbar></Navbar>
 			<div class="notifications">
 			<div class="card noti-card text-bg-light noti-card1">
 				<h5>Notifications</h5>
@@ -30,17 +66,23 @@ const Faculty_Notification=() => {
 			  <div class="card noti-card ">
 			  <h5 class="card-header text-bg-dark">{Notification.labId}</h5>
 			  <div class="card-body">
-				<h5 class="card-title">Lab Join Request</h5>
+				<h5 class="card-title">Lab Join Request Pending</h5>
 				<div class="card-dashboard">
-				  <p class="card-text">{Notification.message}</p>
+				  <p class="card-text">{Notification.studentId}</p>
 				
-				{Notification.Accepted && ( 
 				<div>
-				<Link to = {`/lab/${Notification.labId}`}>
-				<div  class="btn btn-primary"> Go To Lab </div>
-				</Link>
+				<Button onClick={
+					() => {
+						reqA(Notification.studentId)
+					}
+				}>Accept</Button>
+				<Button onClick={
+					() => {
+						reqR(Notification.studentId)
+					}
+				}>Reject</Button>
 				</div>
-				)}
+		
 				</div>
 			  </div>
 			  </div>

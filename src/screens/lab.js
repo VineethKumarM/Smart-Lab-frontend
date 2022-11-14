@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../App";
-// import
+import Navbar from "../components/Navbar";
 
 const Lab=() => {
 
@@ -12,7 +12,7 @@ const Lab=() => {
 
 	return  (
 		<div>
-		<h1> Lab</h1>
+      <Navbar></Navbar>
 		<div class="devices">
         <div class="card text-bg-light">
             <h3 class="card-header text-bg-light">Details</h3>

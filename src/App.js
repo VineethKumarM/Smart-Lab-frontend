@@ -1,5 +1,4 @@
 import "./App.css";
-import "./index.css"
 import { useEffect, createContext, useReducer ,useContext} from "react";
 import {
 	BrowserRouter as Router,
@@ -25,13 +24,7 @@ export const UserContext=createContext();
 const Routing = () => {
 	const history = useNavigate();
 	const {state,dispatch} = useContext(UserContext)
-	// useEffect( () => {
-	// 	const token= JSON.parse(localStorage.getItem("user"))
-	// 	if(token) {
-	// 		history("/");
-	// 	}
-	// 	else history("/login")
-	// } ,[])
+
 
 	return (
 		<Routes>
@@ -40,7 +33,7 @@ const Routing = () => {
 			<Route exact path="/register" element={<Register/>} />
 			<Route exact path="/Sdash" element={<Student_Dashboard/>} />
 			<Route exact path="/Fdash" element={<Fdash/>} />
-			<Route exact path="/lab" element={<Lab/>} />
+			<Route path="/lab" element={<Lab/>} />
 			<Route exact path="/snotif" element={<Student_Notification/>} />
 			<Route exact path="/fnotif" element={<Faculty_Notification/>} />
 			
@@ -58,7 +51,7 @@ function App() {
     <UserContext.Provider value={{ state, dispatch }}>
 			<Router>
 				<div className="App" >
-					<Navbar></Navbar>
+				
 					<div className="content">
 						<Routing />
 					</div>

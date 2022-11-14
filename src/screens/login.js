@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../App";
-
+import Navbar from "../components/Navbar";
 
 const Login = () => {
 	const history = useNavigate();
@@ -31,7 +31,7 @@ const Login = () => {
 					}),
 				})
 				let data = await res.json();
-				console.log();
+				// console.log();
 				if (data.error) {
 					alert(data.error);
 				} else {
@@ -81,6 +81,8 @@ const Login = () => {
 	};
 
 	return (
+		<div>
+		<Navbar></Navbar>
 		
 		<div className="mycard">
 			<div className="card auth-card">
@@ -108,6 +110,7 @@ const Login = () => {
 					<Link to="/register"> Don't have an account?</Link>
 				</p>
 			</div>
+		</div>
 		</div>
 	);
 };

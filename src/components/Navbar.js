@@ -75,7 +75,7 @@ const Navbar = () => {
 	if(jwt) {
 		state=true;
 	}
-	const [modalState,setmodalState] = useState(localStorage.getItem("state")? false : true)
+	const [modalState,setmodalState] = useState(state? false : true)
 
 	function openModal() {
 		setmodalState(!modalState)
@@ -89,7 +89,7 @@ const Navbar = () => {
 			return [
 				<span>
 					
-					<Link to={userType=="student" ?"/snotif" : "/fnotif"}>Notifications</Link>
+					<Link to={userType=="student" ? "/snotif" : "/fnotif"}>Notifications</Link>
 					{ userType=="faculty" ? <Link to="/newPost">new lab</Link> : <span></span>}
 					<button className="btn btn-primary" onClick={() => {
 							localStorage.clear();

@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-
+import Navbar from "../components/Navbar";
 
 const Register = () => {
 	const history = useNavigate();
 	const [name, setName] = useState("");
-	const [phoneNumber, setphoneNumber] = useState(1);
+	const [phoneNumber, setphoneNumber] = useState("");
 	const [RollNo, setRollNo] = useState("");
 	const [password, setpassword] = useState("");
 	const [user,setUser] = useState("");
@@ -77,6 +77,7 @@ const Register = () => {
 	};
 
 	return (
+		<div><Navbar></Navbar>
 		<div className="mycard">
 			<div className="card auth-card ">
 				<h2>Registration</h2>
@@ -132,6 +133,7 @@ const Register = () => {
 					<Link to="/login"> Already have an account?</Link>
 				</p> 
 			</div>
+		</div>
 		</div>
 	);
 };
