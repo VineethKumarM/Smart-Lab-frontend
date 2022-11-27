@@ -18,6 +18,7 @@ import Lab from "./screens/lab"
 import Navbar from "./components/Navbar";
 import Student_Notification from "./screens/notif";
 import Faculty_Notification from "./screens/fnotif";
+import SLab from "./screens/select";
 
 export const UserContext=createContext();
 
@@ -36,7 +37,7 @@ const Routing = () => {
 			<Route path="/lab" element={<Lab/>} />
 			<Route exact path="/snotif" element={<Student_Notification/>} />
 			<Route exact path="/fnotif" element={<Faculty_Notification/>} />
-			
+			<Route exact path="/slab" element={<SLab></SLab>} />
 
 		</Routes>
 	)

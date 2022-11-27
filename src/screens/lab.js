@@ -8,7 +8,29 @@ const Lab=() => {
 
 	const history = useNavigate();
 	const [user,setuser] = useState(	JSON.parse(localStorage.getItem("user")))
-	
+	const [lights,setLights] = useState()
+ 
+  const auth = localStorage.getItem("jwt"); 
+  const getdata = async ()=> {
+    try{
+      let res= await fetch("/alllights",{
+        headers: {
+          "Authorization": auth,
+        },
+      })
+      let data = await res.json();
+				// console.log();
+				if (data.error) {
+					alert(data.error);
+				} else {
+					setLights(data.lights)
+					
+				}
+    } 
+    catch (err) {
+      console.log(err);
+    }
+  }
 
 	return  (
 		<div>
@@ -36,20 +58,7 @@ const Lab=() => {
                 </div>
               </div>
             </div>
-            <div class="col">
-              <div class="card text-bg-dark">
-                <img src="./Images/bridge.png" class="card-img-top" alt="..." width="190px" height="214px"/>
-                <div class="card-body card-dashboard">
-                  <h5 class="card-title">Iot Bulb</h5>
-                  <div class="status">
-                    <label class="switch">
-                        <input type="checkbox"/>
-                        <span class="slider round"></span>
-                      </label>
-                  </div>
-                </div>
-              </div>
-            </div>
+            
             <div class="col">
               <div class="card text-bg-dark">
                 <img src="Images/bridge.png" class="card-img-top" alt="..." width="190px" height="214px"/>
@@ -64,7 +73,7 @@ const Lab=() => {
                 </div>
               </div>
             </div>
-            <div class="col">
+            {/* <div class="col">
                 <div class="card text-bg-dark">
                   <img src="Images/cctv.jpg" class="card-img-top" alt="..." width="190px" height="214px"/>
                   <div class="card-body card-dashboard">
@@ -77,7 +86,7 @@ const Lab=() => {
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> */}
         </div>
         <div class="row row-cols-2 row-cols-md-4 g-4 d1">
             <div class="col">
