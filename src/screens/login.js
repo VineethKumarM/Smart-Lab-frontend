@@ -18,6 +18,10 @@ const Login = () => {
 	const userType = localStorage.getItem("userType");
 	// if(!userType) history("/");
 	const PostData = async () => {
+		if(!userType) {
+			alert("please referesh and select user type")
+			return
+		}
 		if(userType=="faculty") {
 			try {
 				let res = await fetch("/facultysignin", {
