@@ -24,6 +24,8 @@ const Home=() => {
           </ul>
         </div>
       </nav>
+      <br></br>
+      <br></br>
       <div class="hero_text_box">
         <h1 id="headtext">
           Internet Of Things<br />A Dawn To The Smart world!!

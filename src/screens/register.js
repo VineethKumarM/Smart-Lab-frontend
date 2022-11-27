@@ -53,8 +53,6 @@ const Register = () => {
 						"Content-Type": "application/json",
 					},
 					body: JSON.stringify({
-						name,
-						phoneNumber,
 						password,
 						RollNo
 					}),
@@ -81,6 +79,7 @@ const Register = () => {
 		<div className="mycard">
 			<div className="card auth-card ">
 				<h2>Registration</h2>
+				
 				{
 					userType=="student" ? <p className="card-text">
 					<input
@@ -93,7 +92,9 @@ const Register = () => {
 					/>
 				</p> : <p></p>
 				}
-				<p className="card-text">
+
+				{
+				userType=="faculty" ? <p className="card-text">
 					<input
 						type="text"
 						name="name"
@@ -102,8 +103,12 @@ const Register = () => {
 						value={name}
 						onChange={(e) => setName(e.target.value)}
 					/>
-				</p>
-				<p className="card-text">
+				</p> : <p></p>
+				}
+
+				
+				{
+					userType=="faculty" ? <p className="card-text">
 					<input
 						type="text"
 						name="phoneNumber"
@@ -112,7 +117,9 @@ const Register = () => {
 						value={phoneNumber}
 						onChange={(e) => setphoneNumber(e.target.value)}
 					/>
-				</p>
+				</p> : <p></p>
+				}
+
 				<p className="card-text">
 					<input
 						type="password"

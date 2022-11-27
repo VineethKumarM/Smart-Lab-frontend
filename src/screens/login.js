@@ -90,7 +90,6 @@ const Login = () => {
 				<p className="card-text">
 					<input
 						type="text"
-						placeholder="Phone Number"
 						value={phoneNumber}
 						onChange={(e) => setphoneNumber(e.target.value)}
 					/>
