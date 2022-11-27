@@ -11,7 +11,7 @@ const Faculty_Dashboard=() => {
 	const [name,setname] = useState("");
 	const auth = localStorage.getItem("jwt"); 
 	let user = JSON.parse(localStorage.getItem("user"))
-	console.log(user);
+	// console.log(user);
 	React.useEffect(() => {
 		fetchDetails()
 	}, []);
@@ -84,7 +84,7 @@ const Faculty_Dashboard=() => {
 								<div className= "card" id="std">
 									<h3>Lab ID: {user.labId}</h3>
 									
-									<Link to="/lab"> Activate lab</Link>
+									<Link to="/slab"> Activate lab</Link>
 								
 										
 								</div>
