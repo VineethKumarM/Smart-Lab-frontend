@@ -12,7 +12,7 @@ const Student_Dashboard=() => {
 	const [list,setlist] = useState(null)
   	const auth = localStorage.getItem("jwt"); 
 	const [fact,setfact] = useState("");
-	const [labdata,setlabdata] = useState(null)
+	const [labdata,setlabdata] = useState()
 
 	React.useEffect(() => {
 		fetchDetails()
@@ -32,15 +32,18 @@ const Student_Dashboard=() => {
 	}
 
 	const fetchD = async() => {
-		const response = await axios.get('/student/mylabs', {
+		let response = await fetch('/studentmylabs', {
 			headers: {
 				"Authorization": auth,
 			},
 		})
-		if(response){
-			
-			setlabdata(response.data.lab)
-			console.log(labdata);
+		let data = await response.json()
+		if(response) 
+		{
+			console.log(data.lab);
+			setlabdata(data.lab)
+			localStorage.setItem("lab",JSON.stringify(labdata))
+			// console.log("lab: ",labdata);
 		}
 	}
 
@@ -62,20 +65,8 @@ const Student_Dashboard=() => {
 			})
 			let data = await res.json();
 			if (data.message) {
-
-					// let resp = await fetch("/studentDetails", {
-					// 	method: "get",
-					// 	headers: {
-					// 		"Content-Type": "application/json",
-					// 		// "Authorization": auth,
-					// 	}
-					// })
-
-					// let udata = resp.json();
-
 					localStorage.setItem("user",JSON.stringify(data.user))
 					alert(data.message + "	Please Refresh");
-					// history("/Sdash")
 					
 				} else {
 					alert("Error"); 
@@ -88,7 +79,7 @@ const Student_Dashboard=() => {
 		
 	}
 
-	console.log(user.labJoinStatus);
+	// console.log(user.labJoinStatus);
 	if(user.labJoinStatus==-1) {
 		return (
 			<div>
@@ -150,12 +141,17 @@ const Student_Dashboard=() => {
 		<div>
 			<Navbar></Navbar>
 			<div class="card text-bg-light">
-					<h5 class="card-header text-bg-light">{labdata.name}</h5>
-					<p>labdata.facultyId</p>
+				<p>lab active</p>
+				{ labdata && <div>
+					<Link class="card-header text-bg-light" to="/studentlab">{labdata[0].name}</Link>
+					{/* <h5 class="card-header text-bg-light" >{labdata[0].name}</h5> */}
+					<p>{labdata[0].facultyId}</p>
 					{/* <div class="card-body">
 						<h5 class="card-title">Faculty : {user.faculty}</h5>
 						<a href="#" class="btn text-bg-success">Active</a>
 					</div> */}
+					</div> 
+	}
 				</div>
 		</div>
 			

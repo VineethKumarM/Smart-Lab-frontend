@@ -12,12 +12,13 @@ const Faculty_Notification=() => {
 	  const jwt = localStorage.getItem("jwt")
 	  const [Notifications , setNotifications] = React.useState(user.notification)
 	  const reqA = async(id) => {
+		console.log(id);
 		try{
 			let res= await fetch("/acceptstudentrequest", {
 				method: "post",
 				headers:{
-
-					"authorization" : jwt
+					"Content-Type": "application/json",
+					"authorization": jwt,
 				},
 				body: JSON.stringify({
 					studentId: id,
@@ -37,6 +38,7 @@ const Faculty_Notification=() => {
 			let res= await fetch("/rejectstudentrequest", {
 				method: "post",
 				headers:{
+					"Content-Type": "application/json",
 					"authorization" : jwt
 				},
 				body: JSON.stringify({

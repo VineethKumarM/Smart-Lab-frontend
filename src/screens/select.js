@@ -8,7 +8,7 @@ const SLab=() => {
 
 	const history = useNavigate();
 	const [user,setuser] = useState(	JSON.parse(localStorage.getItem("user")))
-	const [lights,setLights] = useState([])
+	const [list,setlist] = useState([{id:1,name:"hello",state:true}])
     // const [selects,setSelects] = useState()
     var selected = [];
     React.useEffect(() => {
@@ -19,6 +19,7 @@ const SLab=() => {
   const auth = localStorage.getItem("jwt"); 
   const getdata = async ()=> {
     try{
+        // console.log("hi");
         let res= await fetch("/allLights",{
             headers: {
             // "Authorization": auth,
@@ -30,7 +31,8 @@ const SLab=() => {
             alert(data.error);
         } else {
             console.log(data);
-            setLights(data.lights)
+            setlist(data.list)
+            // console.log(list);
             
         }
     } 
@@ -41,26 +43,7 @@ const SLab=() => {
   const [hide,sethide] = useState(false);
 	const [fhide,setfhide] = useState(false);
 
-    const toggleDevice = (id,state) => {
-        if(state) {
-            fetch("/LightOff", {
-             id:id
-            })
-            .then(res => res.json())
-            .then(data => {
-                console.log(data.success);
-            })
-        }
-        else {
-            fetch("/LightOff" ,{
-                id:id
-               })
-               .then(res => res.json())
-               .then(data => {
-                   console.log(data.success);
-               })
-        }
-    }
+    
 
 	return  (
 	<div>
@@ -74,10 +57,10 @@ const SLab=() => {
                 </div>
             </div>
             <div class="row row-cols-2 row-cols-md-4 g-4 d1">
-                <div className={hide ? "vcard hide" : "vcard"}  id="first">
+                <div >
                     
                     {
-                        lights && lights.map(light => 
+                        list  && list.map(light => 
                             <div class="col">
                             <button onClick={() => {
                                 selected.push(light)
@@ -85,44 +68,21 @@ const SLab=() => {
                             }
 
                             }>
-                                light.data.name
+                                light.name
                             </button>
                             </div>
                         )
                     }
                     <button onClick={() => {
-                        sethide(!hide);
-                        setfhide(!fhide)
+                        // sethide(!hide);
+                        // setfhide(!fhide)
+                        localStorage.setItem("labs",JSON.stringify(selected))
+                        history("/lab")
                     }}>Submit</button>
                 
                 </div>
 
-                <div>
-                {
-                    selected.length > 0 ? 
-                    selected.map(item => 
-                       
-                        <div class="col">
-                            <div class="card text-bg-dark">
-                                <img src="./Images/bridge.png" class="card-img-top" alt="..." width="190px" height="214px"/>
-                                <div class="card-body card-dashboard">
-                                <h5 class="card-title">item.name</h5>
-                                <div class="status">
-                                    <label class="switch">
-                                        <input type="checkbox" onChange={() => {
-                                            toggleDevice(item.id,item.state)
-                                        }} />
-                                        <span class="slider round"></span>
-                                    </label>
-                                </div>
-                                </div>
-                            </div>
-                        </div>
-                       
-                        
-                    ) : <div></div>
-                }
-                </div>
+                
                 
             </div>
         </div>

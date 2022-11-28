@@ -90,7 +90,7 @@ const Navbar = () => {
 				<span>
 					
 					<Link to={userType=="student" ? "/snotif" : "/fnotif"}>Notifications</Link>
-					{ userType=="faculty" ? <Link to="/newPost">new lab</Link> : <span></span>}
+					{ userType=="faculty" ? <span><Link to="/newPost">new lab</Link><Link to="/fDash">Dashboard</Link></span> : <span><Link to="/sDash">Dashboard</Link></span>}
 					<button className="btn btn-primary" onClick={() => {
 							localStorage.clear();
 							dispatch({type:"CLEAR"})

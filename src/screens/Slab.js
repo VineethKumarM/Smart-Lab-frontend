@@ -3,16 +3,17 @@ import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../App";
 import Navbar from "../components/Navbar";
-import { Button } from "react-bootstrap"; 
+import { Button } from "react-bootstrap";
 
-const Lab=() => {
+const StudentLab=() => {
 
 	const history = useNavigate();
 	const [user,setuser] = useState(	JSON.parse(localStorage.getItem("user")))
-	const [id,setid] = useState();
-	const [state,setstate] = useState();
+	const [list,setlist] = useState([{id:1,name:"hello",state:true}])
+    const [state,setstate] = useState();
 	const [ct,setct] = useState();
 	const [brt,setbrt] = useState();
+	const [id,setid] = useState();
 	// const [selected,setLights] = useState(	JSON.parse(localStorage.getItem("labs")))
 	var selected = JSON.parse(localStorage.getItem("labs"))
 	const auth = localStorage.getItem("jwt"); 
@@ -85,28 +86,27 @@ const Lab=() => {
 		}
 	}
 	
+  const [hide,sethide] = useState(false);
+	const [fhide,setfhide] = useState(false);
 
-
-
+    
 
 	return  (
-		<div>
+	<div>
       <Navbar></Navbar>
 		<div class="devices">
-        <div class="card text-bg-light">
-            <h3 class="card-header text-bg-light">Details</h3>
-            <div class="card-body card-dashboard">
-              <h5 class="card-title">Faculty : {user.name}</h5>
-              <a href="#" class="btn text-bg-success">Active</a>
+            <div class="card text-bg-light">
+                <h3 class="card-header text-bg-light">Details</h3>
+                <div class="card-body card-dashboard">
+                <h5 class="card-title">Student Roll No : rollno{  user.rollno}</h5>
+                </div>
             </div>
-          </div>
-        <div class="row row-cols-2 row-cols-md-4 g-4 d1">
-       
-                {
-                    selected.length > 0 ? 
-                    selected.map(item => 
-                       
-                        <div class="col">
+            <div class="row row-cols-2 row-cols-md-4 g-4 d1">
+                <div >
+                    
+                    {
+                        list  && list.map(item => 
+                            <div class="col">
                             <div class="card text-bg-dark">
                                 <img src="./Images/bridge.png" class="card-img-top" alt="..." width="190px" height="214px"/>
                                 <div class="card-body card-dashboard">
@@ -143,18 +143,24 @@ const Lab=() => {
                                 </div>
                             </div>
                         </div>
-                       
-                        
-                    ) : <div></div>
-                }
+                        )
+                    }
+                    {/* <button onClick={() => {
+                        // sethide(!hide);
+                        // setfhide(!fhide)
+                        localStorage.setItem("labs",JSON.stringify(selected))
+                        history("/lab")
+                    }}>Submit</button> */}
                 
-            
-        </div>
-        
+                </div>
+
+                
+                
+            </div>
         </div>
     </div>
 	)
 	
 }
 
-export default Lab;
+export default StudentLab;

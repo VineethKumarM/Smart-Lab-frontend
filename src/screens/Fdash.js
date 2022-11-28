@@ -25,7 +25,8 @@ const Faculty_Dashboard=() => {
 		})
 		if(response){
 			
-			setlabs(response.data.lab)
+			setlabs(response.data.labs)
+			// console.log(lab);
 		}
 	}
 
