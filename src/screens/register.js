@@ -37,7 +37,7 @@ const Register = () => {
 					alert(data.error);
 
 				} else {
-					alert(data.message);
+					alert(data.success);
 					history("/login");
 				}
 			}
@@ -53,10 +53,8 @@ const Register = () => {
 						"Content-Type": "application/json",
 					},
 					body: JSON.stringify({
-						name,
-						phoneNumber,
+						rollNumber:RollNo,
 						password,
-						RollNo
 					}),
 				})
 				let data = await res.json();
@@ -66,7 +64,7 @@ const Register = () => {
 					alert(data.error);
 
 				} else {
-					alert(data.message);
+					alert(data.success);
 					history("/login");
 				}
 			}
@@ -91,28 +89,29 @@ const Register = () => {
 						value={RollNo}
 						onChange={(e) => setRollNo(e.target.value)}
 					/>
-				</p> : <p></p>
+				</p> : <div>
+				<p className="card-text">
+				<input
+					type="text"
+					name="name"
+					id="name"
+					placeholder="name"
+					value={name}
+					onChange={(e) => setName(e.target.value)}
+				/>
+			</p>
+			<p className="card-text">
+				<input
+					type="text"
+					name="phoneNumber"
+					id="phoneNumber"
+					placeholder="phoneNumber"
+					value={phoneNumber}
+					onChange={(e) => setphoneNumber(e.target.value)}
+				/>
+			</p> </div>
 				}
-				<p className="card-text">
-					<input
-						type="text"
-						name="name"
-						id="name"
-						placeholder="name"
-						value={name}
-						onChange={(e) => setName(e.target.value)}
-					/>
-				</p>
-				<p className="card-text">
-					<input
-						type="text"
-						name="phoneNumber"
-						id="phoneNumber"
-						placeholder="phoneNumber"
-						value={phoneNumber}
-						onChange={(e) => setphoneNumber(e.target.value)}
-					/>
-				</p>
+				{/* */}
 				<p className="card-text">
 					<input
 						type="password"

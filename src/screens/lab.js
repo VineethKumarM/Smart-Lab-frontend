@@ -36,6 +36,7 @@ const Lab=() => {
 			let data = await res.json();
 			if(data.err) alert(data.err)
 			else console.log(data);
+			setstate(!state)
 
 		}catch (err) {
 		console.log(err);
@@ -55,11 +56,13 @@ const Lab=() => {
 			let data = await res.json();
 			if(data.err) alert(data.err)
 			else console.log(data);
+			setstate(!state)
 
 		}catch (err) {
 		console.log(err);
 		}
 		}
+		
 	}
 
 	const configDevice = async(id) => {

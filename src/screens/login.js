@@ -6,6 +6,7 @@ import Navbar from "../components/Navbar";
 const Login = () => {
 	const history = useNavigate();
 	const [phoneNumber, setphoneNumber] = useState("");
+	const [roll,setroll] = useState("")
 	const [password, setpassword] = useState("");
 	const { state, dispatch } = useContext(UserContext);
 	const [viewNotif, setviewNotif] = useState(false);
@@ -60,7 +61,7 @@ const Login = () => {
 						"Content-Type": "application/json",
 					},
 					body: JSON.stringify({
-						phoneNumber,
+						rollNumber: roll,
 						password,
 					}),
 				})
@@ -92,12 +93,20 @@ const Login = () => {
 			<div className="card auth-card">
 				<h2>Login</h2>
 				<p className="card-text">
+					{ userType=="faculty" ?
 					<input
 						type="text"
 						placeholder="Phone Number"
 						value={phoneNumber}
 						onChange={(e) => setphoneNumber(e.target.value)}
+					/> : 
+					<input
+						type="text"
+						placeholder="rollNO"
+						value={roll}
+						onChange={(e) => setroll(e.target.value)}
 					/>
+	}
 				</p>
 				<p className="card-text">
 					<input

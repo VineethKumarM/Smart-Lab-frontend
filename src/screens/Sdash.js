@@ -16,9 +16,14 @@ const Student_Dashboard=() => {
 
 	React.useEffect(() => {
 		fetchDetails()
-		fetchD()
+		if(user.labJoinStatus==1) fetchD()
 	}, []);
-	
+	// if(user.labJoinStatus==1) {
+	// 	React.useEffect(() => {
+	// 		fetchDetails()
+	// 		fetchD()
+	// 	}, []);
+	// }
 	const fetchDetails = async() => {
 		const response = await axios.get('/allfaculties', {
 			headers: {
@@ -69,7 +74,7 @@ const Student_Dashboard=() => {
 					alert(data.message + "	Please Refresh");
 					
 				} else {
-					alert("Error"); 
+					alert("Error",res.status); 
 					history("/");
 				}
 		}
@@ -142,7 +147,7 @@ const Student_Dashboard=() => {
 			<Navbar></Navbar>
 			<div class="card text-bg-light">
 				<p>lab active</p>
-				{ labdata && <div>
+				{ labdata ? <div>
 					<Link class="card-header text-bg-light" to="/studentlab">{labdata[0].name}</Link>
 					{/* <h5 class="card-header text-bg-light" >{labdata[0].name}</h5> */}
 					<p>{labdata[0].facultyId}</p>
@@ -150,7 +155,7 @@ const Student_Dashboard=() => {
 						<h5 class="card-title">Faculty : {user.faculty}</h5>
 						<a href="#" class="btn text-bg-success">Active</a>
 					</div> */}
-					</div> 
+					</div> : {}
 	}
 				</div>
 		</div>
