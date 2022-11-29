@@ -4,12 +4,13 @@ import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../App";
 import Navbar from "../components/Navbar";
 import { Button } from "react-bootstrap"; 
+import Timer from "../components/Timer";
 
 const Lab=() => {
 
 	const history = useNavigate();
 	const [user,setuser] = useState(	JSON.parse(localStorage.getItem("user")))
-	const [id,setid] = useState();
+	const [id,setid] = useState("1");
 	const [state,setstate] = useState();
 	const [ct,setct] = useState();
 	const [brt,setbrt] = useState();
@@ -103,6 +104,7 @@ const Lab=() => {
               <a href="#" class="btn text-bg-success">Active</a>
             </div>
           </div>
+		  <Timer  max={66} />
         <div class="row row-cols-2 row-cols-md-4 g-4 d1">
        
                 {
